@@ -62,7 +62,7 @@ public interface AsyncCacheLoader<K, V extends @Nullable Object> {
    *         treated like any other {@code Exception} in all respects except that, when it is
    *         caught, the thread's interrupt status is set
    */
-  CompletableFuture<? extends V> asyncLoad(K key, Executor executor) throws Exception;
+  CompletableFuture<V> asyncLoad(K key, Executor executor) throws Exception;
 
   /**
    * Asynchronously computes or retrieves the values corresponding to {@code keys}. This method is

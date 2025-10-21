@@ -727,7 +727,7 @@ public @interface CacheSpec {
         this.loader = loader;
       }
       @Override
-      public CompletableFuture<? extends Int> asyncLoad(
+      public CompletableFuture<Int> asyncLoad(
           Int key, Executor executor) throws Exception {
         return loader.asyncLoad(key, executor);
       }
