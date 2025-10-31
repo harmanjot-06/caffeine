@@ -997,9 +997,12 @@ abstract class BoundedLocalCache<K, V> extends BLCHeader.DrainStatusRef
     if (isComputingAsync(node.getValue())) {
       return false;
     }
+
+    boolean expiredAfterWrite = expiresAfterWrite() && (now - node.getWriteTime() >= expiresAfterWriteNanos());
+    boolean expiredvariable = expiresVariable() && (now - node.getVariableTime() >= 0);
     return (expiresAfterAccess() && (now - node.getAccessTime() >= expiresAfterAccessNanos()))
-        | (expiresAfterWrite() && (now - node.getWriteTime() >= expiresAfterWriteNanos()))
-        | (expiresVariable() && (now - node.getVariableTime() >= 0));
+        || expiredAfterWrite
+        || expiredvariable;
   }
 
   /**
